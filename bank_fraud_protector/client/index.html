@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Bank Fraud Protector - Demo UI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-50 to-indigo-100 min-h-screen flex justify-center items-center font-sans">
+  <div class="container max-w-3xl mx-auto p-6">
+    <h1 class="text-3xl font-bold text-center text-indigo-800 mb-8">🏦 Bank Fraud Protector — Demo</h1>
+
+    <!-- Simulate SMS -->
+    <section class="bg-white shadow-lg rounded-2xl p-6 mb-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-3">📩 Simulate Incoming SMS</h3>
+      <textarea id="sms_text" class="w-full p-3 border rounded-lg focus:ring focus:ring-indigo-300 mb-4">WINNER! You have won a prize. Click http://malicious.example.com/claim</textarea>
+      <div class="flex gap-3">
+        <input id="user_id" placeholder="User ID (e.g. user1)" value="user1" class="flex-1 p-2 border rounded-lg focus:ring focus:ring-indigo-300"/>
+        <button id="send_sms_btn" onclick="sendSms()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">Send SMS</button>
+      </div>
+      <div id="sms_result" class="mt-3 text-sm text-gray-600"></div>
+    </section>
+
+    <!-- Links and Transfer -->
+    <section class="bg-white shadow-lg rounded-2xl p-6 mb-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-3">🔗 Open Link</h3>
+      <div class="flex gap-3 mb-4">
+        <input id="open_url" placeholder="https://..." class="flex-1 p-2 border rounded-lg focus:ring focus:ring-indigo-300"/>
+        <button onclick="openLink()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Open Link</button>
+      </div>
+      <div id="open_result" class="mb-6 text-sm text-gray-600"></div>
+
+      <h3 class="text-lg font-semibold text-gray-700 mb-3">💸 Initiate Transfer</h3>
+      <div class="flex gap-3 mb-3">
+        <input id="to_account" placeholder="Beneficiary account" class="flex-1 p-2 border rounded-lg focus:ring focus:ring-indigo-300"/>
+        <input id="amount" placeholder="Amount" class="w-32 p-2 border rounded-lg focus:ring focus:ring-indigo-300"/>
+      </div>
+      <button onclick="initiateTransfer()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Initiate Transfer</button>
+      <div id="transfer_result" class="mt-3 text-sm text-gray-600"></div>
+    </section>
+
+    <!-- OTP Confirmation -->
+    <section class="bg-white shadow-lg rounded-2xl p-6 mb-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-3">🔑 Confirm OTP</h3>
+      <div class="flex gap-3 mb-3">
+        <input id="session_id" placeholder="Session ID" class="flex-1 p-2 border rounded-lg focus:ring focus:ring-indigo-300"/>
+        <input id="otp" placeholder="OTP" class="w-32 p-2 border rounded-lg focus:ring focus:ring-indigo-300"/>
+      </div>
+      <label class="flex items-center mb-3">
+        <input id="approve_ben" type="checkbox" class="mr-2" /> Approve beneficiary
+      </label>
+      <button onclick="confirmTransfer()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Confirm OTP</button>
+      <div id="otp_result" class="mt-3 text-sm text-gray-600"></div>
+    </section>
+
+    <!-- Account Status -->
+    <section class="bg-white shadow-lg rounded-2xl p-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-3">📊 Account Status</h3>
+      <div class="flex gap-3 mb-3">
+        <button onclick="getStatus()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">Get Status</button>
+        <button onclick="unfreeze()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">Manual Unfreeze (Admin)</button>
+      </div>
+      <pre id="status_area" class="bg-gray-100 p-3 rounded-lg text-sm"></pre>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
